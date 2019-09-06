@@ -4,42 +4,39 @@ namespace InterestCalculator
 {
     class Interest
     {
-        public int InterestOverYear(int balance, DateTime date, float annualInterestRate)
+        public float InterestOverYear(int balance, int yearOfInterest, float annualInterestRate)
         {
-            int year = date.Year;
-            int interestPeriod = year - DateTime.Now.Year;
+            int interestPeriod = yearOfInterest - DateTime.Now.Year;
 
             int monthlyInterestRate = (int)annualInterestRate / 12;
 
             int interestAccumulated = (monthlyInterestRate * balance) * interestPeriod;
 
-            return interestAccumulated;
+            return (float)interestAccumulated;
         }
 
-        public int InterestOverMonths(int balance, int monthsPassed, float annualInterestRate)
+        public float InterestOverMonths(int balance, int monthsPassed, float annualInterestRate)
         {
+
+            int interestPeriod = monthsPassed - DateTime.Now.Month;
+
             int monthlyInterestRate = (int)annualInterestRate / 12;
 
-            int monthlyInterestAccumluated = (monthlyInterestRate * balance) * monthsPassed;
+            int monthlyInterestAccumluated = (monthlyInterestRate * balance) * interestPeriod;
 
-            int interestPlusBalance = monthlyInterestAccumluated + balance;
-
-            return interestPlusBalance;
+            return (float)monthlyInterestAccumluated;
 
         }
 
 
-
-
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
+        class Program
         {
-            Interest interestOverYear = new Interest();
-            int showInterest = interestOverYear.InterestOverYear(2000, 1, 0.5f);
-            Console.WriteLine(showInterest);
+            static void Main(string[] args)
+            {
+                Interest interestOverYear = new Interest();
+                float showInterest = interestOverYear.InterestOverYear(2000, 2008, 0.5f);
+                Console.WriteLine(showInterest);
+            }
         }
     }
 }
